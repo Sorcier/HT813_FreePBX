@@ -41,23 +41,23 @@ Le Grandstream **HT813** est une passerelle VoIP hybride équipée de :
 
 ```mermaid
 flowchart LR
-    subgraph RTC / Internet
-        Orange[Réseau Orange]
+    subgraph WAN ["RTC / Internet"]
+        Orange["Réseau Orange"]
     end
 
-    subgraph Domicile / Bureau
-        LB[Orange Livebox<br/>Port TEL RJ11]
-        HT813[Grandstream HT813]
-        FPBX[Serveur FreePBX<br/>10.10.10.5]
-        PhoneFXS[Téléphone analogique<br/>Poste 4000 Salon]
-        IPPhone[Téléphones IP / Softphones]
+    subgraph LAN ["Domicile / Bureau"]
+        LB["Orange Livebox<br/>Port TEL RJ11"]
+        HT813["Grandstream HT813"]
+        FPBX["Serveur FreePBX<br/>10.10.10.5"]
+        PhoneFXS["Téléphone analogique<br/>Poste 4000 Salon"]
+        IPPhone["Téléphones IP / Softphones"]
     end
 
     Orange <--> LB
-    LB -- Câble RJ11 -->|Port FXO / LINE| HT813
-    HT813 -- Câble RJ11 -->|Port FXS / PHONE| PhoneFXS
-    HT813 <== Réseau LAN (SIP PJSIP) ==> FPBX
-    FPBX <== Réseau LAN ==> IPPhone
+    LB -->|"Câble RJ11 (Port FXO / LINE)"| HT813
+    HT813 -->|"Câble RJ11 (Port FXS / PHONE)"| PhoneFXS
+    HT813 <-->|"Réseau LAN (SIP PJSIP)"| FPBX
+    FPBX <-->|"Réseau LAN"| IPPhone
 ```
 
 ---
